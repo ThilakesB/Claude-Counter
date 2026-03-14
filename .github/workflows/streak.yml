@@ -1,32 +1,15 @@
-name: GitHub Streak Automator
+- name: Configure Git
+  run: |
+    git config --global user.name "github-actions[bot]"
+    git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-on:
-  schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch:
+- name: Pull latest changes
+  run: git pull --rebase origin main
 
-jobs:
-  update-streak:
-    runs-on: ubuntu-latest
+- name: Commit changes
+  run: |
+    git add .
+    git commit -m "chore: update GitHub streak" || echo "No changes to commit"
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Pull remote changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git pull --rebase origin main
-
-      - name: Update streak file
-        run: |
-          echo "Streak updated on $(date)" >> streak.txt
-
-      - name: Commit and Push
-        run: |
-          git add .
-          git commit -m "chore: update GitHub streak" || echo "No changes to commit"
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- name: Push changes
+  run: git push origin main
