@@ -13,18 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Pull remote changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
+
       - name: Update streak file
         run: |
           echo "Streak updated on $(date)" >> streak.txt
 
-      - name: Commit changes
+      - name: Commit and Push
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add streak.txt
+          git add .
           git commit -m "chore: update GitHub streak" || echo "No changes to commit"
-
-      - name: Pull latest changes
-        run: git pull --rebase origin main
-      - name: Push changes
-        run: git push origin main
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
