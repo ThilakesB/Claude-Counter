@@ -15,20 +15,16 @@ jobs:
 
       - name: Update streak file
         run: |
-          echo "Update $(date)" >> streak.txt
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-
-      - name: Pull latest changes
-        run: git pull --rebase origin main
+          echo "Streak updated on $(date)" >> streak.txt
 
       - name: Commit changes
         run: |
-          git add .
-          git commit -m "Daily streak update" || echo "No changes to commit"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add streak.txt
+          git commit -m "chore: update GitHub streak" || echo "No changes to commit"
 
+      - name: Pull latest changes
+        run: git pull --rebase origin main
       - name: Push changes
         run: git push origin main
