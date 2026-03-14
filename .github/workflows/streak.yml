@@ -1,18 +1,49 @@
-- name: Configure Git
-  run: |
-    git config --global user.name "github-actions[bot]"
-    git config --global user.email "github-actions[bot]@users.noreply.github.com"
+name: GitHub Streak Automator
 
-- name: Pull latest changes
-  run: git pull --rebase origin main
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
-- name: Update streak
-  run: echo "Update $(date)" >> streak.txt
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
 
-- name: Commit changes
-  run: |
-    git add streak.txt
-    git commit -m "chore: update GitHub streak" || echo "No changes to commit"
+permissions:
+  contents: write
 
-- name: Push changes
-  run: git push origin main
+jobs:
+  update-streak:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync with remote
+        run: |
+          git pull --rebase origin main
+
+      - name: Update streak file
+        run: |
+          echo "Update $(date)" >> streak.txt
+
+      - name: Commit changes
+        run: |
+          git add streak.txt
+          git commit -m "chore: update GitHub streak" || echo "No changes to commit"
+
+      - name: Push changes
+        run: |
+          git push origin main
