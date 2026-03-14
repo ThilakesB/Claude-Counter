@@ -6,9 +6,12 @@
 - name: Pull latest changes
   run: git pull --rebase origin main
 
+- name: Update streak
+  run: echo "Update $(date)" >> streak.txt
+
 - name: Commit changes
   run: |
-    git add .
+    git add streak.txt
     git commit -m "chore: update GitHub streak" || echo "No changes to commit"
 
 - name: Push changes
