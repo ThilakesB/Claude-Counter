@@ -1,11 +1,12 @@
 name: GitHub Streak Automator
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * *"   # 12:00 AM UTC
+    - cron: "0 6 * * *"   # 6:00 AM UTC
+    - cron: "0 10 * * *"  # 10:00 AM UTC
+    - cron: "0 14 * * *"  # 2:00 PM UTC
+    - cron: "0 18 * * *"  # 6:00 PM UTC
   workflow_dispatch:
 
 permissions:
@@ -20,11 +21,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
 
       - name: Configure Git
         run: |
