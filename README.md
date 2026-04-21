@@ -2,8 +2,6 @@
 
 Automated GitHub contribution streak maintainer using GitHub Actions.
 
-> If a README contains full HTML page tags (`<!DOCTYPE html>`, `<head>`, `<style>`, `<script>`), GitHub strips/sanitizes most of it, which can make it look broken or like plain text. This README is now GitHub-compatible Markdown.
-
 ## How it works
 
 1. A scheduled GitHub Actions workflow runs multiple times daily.
@@ -50,8 +48,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name "ThilakesB"
-          git config --global user.email "200460169+ThilakesB@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Sync with remote
         run: |
