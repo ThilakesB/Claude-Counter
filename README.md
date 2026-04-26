@@ -29,9 +29,11 @@ name: GitHub Streak Automator
 on:
   schedule:
     - cron: "0 0 * * *"   # 12:00 AM UTC
+    - cron: "0 3 * * *"   # 3:00 AM UTC
     - cron: "0 6 * * *"   # 6:00 AM UTC
-    - cron: "0 10 * * *"  # 10:00 AM UTC
-    - cron: "0 14 * * *"  # 2:00 PM UTC
+    - cron: "0 9 * * *"   # 9:00 AM UTC
+    - cron: "0 12 * * *"  # 12:00 PM UTC
+    - cron: "0 15 * * *"  # 3:00 PM UTC
     - cron: "0 18 * * *"  # 6:00 PM UTC
   workflow_dispatch:
 
