@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Claude Counter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Monitor Claude AI token usage, session limits, weekly limits, and cache timer in real-time.",
   "icons": {
     "16": "icons/icon16.png",
@@ -17,7 +17,9 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://claude.ai/*"],
+      "matches": [
+        "https://claude.ai/*"
+      ],
       "js": [
         "src/content/constants.js",
         "src/content/tokens.js",
@@ -25,15 +27,22 @@
         "src/content/bridge-client.js",
         "src/content/main.js"
       ],
-      "css": ["src/styles.css"],
+      "css": [
+        "src/styles.css"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["src/injected/bridge.js", "src/vendor/o200k_base.js"],
-      "matches": ["https://claude.ai/*"]
+      "resources": [
+        "src/injected/bridge.js",
+        "src/vendor/o200k_base.js"
+      ],
+      "matches": [
+        "https://claude.ai/*"
+      ]
     }
   ],
   "browser_specific_settings": {
