@@ -1,0 +1,195 @@
+/* ============================================================
+   styles.css — Claude Counter dark-theme UI
+   All classes are prefixed with "cc-" to avoid conflicts
+   ============================================================ */
+
+/* ── Custom properties ─────────────────────────────────────── */
+:root {
+  --cc-bg:         #1a1a1a;
+  --cc-bg-glass:   rgba(26, 26, 26, 0.92);
+  --cc-surface:    #242424;
+  --cc-border:     #2e2e2e;
+  --cc-text:       #e8e8e8;
+  --cc-muted:      #888888;
+  --cc-blue:       #4a90d9;
+  --cc-blue-dim:   rgba(74, 144, 217, 0.18);
+  --cc-green:      #4caf84;
+  --cc-yellow:     #f5a623;
+  --cc-red:        #e74c3c;
+  --cc-radius:     8px;
+  --cc-radius-sm:  4px;
+  --cc-font:       -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI',
+                   sans-serif;
+}
+
+/* ── Header widget ─────────────────────────────────────────── */
+#cc-header-widget {
+  display:         flex;
+  align-items:     center;
+  gap:             10px;
+  padding:         4px 10px;
+  background:      var(--cc-bg-glass);
+  border:          1px solid var(--cc-border);
+  border-radius:   var(--cc-radius);
+  backdrop-filter: blur(6px);
+  font-family:     var(--cc-font);
+  font-size:       11px;
+  color:           var(--cc-text);
+  margin:          4px 10px;
+  white-space:     nowrap;
+  box-shadow:      0 2px 12px rgba(0,0,0,0.4);
+  z-index:         9999;
+  transition:      opacity 0.3s ease;
+  animation:       cc-fadein 0.4s ease;
+}
+
+#cc-header-widget-fallback-wrap #cc-header-widget {
+  margin: 6px;
+  position: relative;
+}
+
+/* ── Token block ───────────────────────────────────────────── */
+.cc-token-block,
+.cc-cache-block {
+  display:     flex;
+  align-items: center;
+  gap:         5px;
+}
+
+.cc-label {
+  font-size:      9px;
+  font-weight:    700;
+  letter-spacing: 0.08em;
+  color:          var(--cc-muted);
+  text-transform: uppercase;
+}
+
+.cc-value {
+  font-size:   12px;
+  font-weight: 600;
+  color:       var(--cc-blue);
+  min-width:   68px;
+  transition:  color 0.4s ease;
+}
+
+.cc-cache-value {
+  min-width: 90px;
+}
+
+.cc-sublabel {
+  font-size: 9px;
+  color:     var(--cc-muted);
+}
+
+/* ── Progress bars (header) ────────────────────────────────── */
+.cc-token-track {
+  width:          70px;
+  height:         4px;
+  background:     var(--cc-surface);
+  border-radius:  var(--cc-radius-sm);
+  overflow:       hidden;
+}
+
+.cc-bar-fill {
+  height:           100%;
+  border-radius:    var(--cc-radius-sm);
+  background:       var(--cc-blue);
+  transition:       width 0.6s ease, background-color 0.4s ease;
+  min-width:        2px;
+}
+
+/* ── Divider ───────────────────────────────────────────────── */
+.cc-divider {
+  width:        1px;
+  height:       20px;
+  background:   var(--cc-border);
+  flex-shrink:  0;
+}
+
+/* ── Input widget (Session & Weekly bars) ───────────────────── */
+#cc-input-widget {
+  display:        flex;
+  flex-direction: column;
+  gap:            5px;
+  padding:        7px 14px;
+  background:     var(--cc-bg-glass);
+  border:         1px solid var(--cc-border);
+  border-radius:  var(--cc-radius) var(--cc-radius) 0 0;
+  font-family:    var(--cc-font);
+  font-size:      11px;
+  color:          var(--cc-text);
+  backdrop-filter: blur(6px);
+  box-shadow:     0 -2px 12px rgba(0,0,0,0.3);
+  animation:      cc-fadein 0.4s ease;
+  z-index:        9998;
+}
+
+.cc-usage-row {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+  height:      16px;
+}
+
+.cc-usage-label {
+  font-size:      9px;
+  font-weight:    700;
+  letter-spacing: 0.06em;
+  color:          var(--cc-muted);
+  text-transform: uppercase;
+  min-width:      44px;
+}
+
+.cc-bar-track {
+  flex:          1;
+  height:        4px;
+  background:    var(--cc-surface);
+  border-radius: var(--cc-radius-sm);
+  overflow:      hidden;
+  min-width:     60px;
+}
+
+.cc-usage-stat {
+  font-size:  10px;
+  color:      var(--cc-muted);
+  min-width:  140px;
+  text-align: right;
+}
+
+.cc-bar-session {
+  background: var(--cc-blue);
+}
+
+.cc-bar-weekly {
+  background: #7b6fd4;
+}
+
+/* ── Animation ─────────────────────────────────────────────── */
+@keyframes cc-fadein {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Glow pulse when cache is active ───────────────────────── */
+.cc-cache-active .cc-cache-value {
+  text-shadow: 0 0 6px rgba(76, 175, 132, 0.6);
+}
+
+/* ── Responsive adjustments ────────────────────────────────── */
+@media (max-width: 640px) {
+  #cc-header-widget {
+    font-size: 10px;
+    padding:   3px 6px;
+    gap:       7px;
+  }
+  .cc-token-track {
+    width: 44px;
+  }
+  .cc-cache-value {
+    min-width: 70px;
+  }
+  .cc-usage-stat {
+    min-width: 100px;
+    font-size: 9px;
+  }
+}
