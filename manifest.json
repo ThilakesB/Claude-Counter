@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Claude Counter",
-  "version": "1.0.83",
+  "version": "1.0.84",
   "description": "Monitor Claude AI token usage, session limits, weekly limits, and cache timer in real-time.",
   "icons": {
     "16": "icons/icon16.png",
